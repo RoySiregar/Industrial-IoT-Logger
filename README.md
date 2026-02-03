@@ -81,3 +81,46 @@ Follow these steps to run the project locally.
 ```bash
 git clone [https://github.com/RoySiregar/Industrial-IoT-Logger.git](https://github.com/RoySiregar/Industrial-IoT-Logger.git)
 cd Industrial-IoT-Logger
+
+### Step 2: Configure Database
+Open your SQL Client (HeidiSQL/phpMyAdmin) and execute the script found in sql/schema.sql:
+```bash
+CREATE DATABASE IF NOT EXISTS aoi;
+USE aoi;
+
+CREATE TABLE IF NOT EXISTS ptbproductiondata (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Factory VARCHAR(50),
+    Floor VARCHAR(50),
+    Line VARCHAR(50),
+    Project VARCHAR(100),
+    StationName VARCHAR(100),
+    EquipmentName VARCHAR(100),
+    CurrentTime DATETIME,
+    Level VARCHAR(50),
+    Category VARCHAR(50),
+    Description VARCHAR(100),
+    Message TEXT,
+    ct_time VARCHAR(50),
+    result VARCHAR(50),
+    RecordedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+### Step 3: Run the Application
+1.Open the solution file src/StationRunningStateService.sln in Visual Studio.
+
+2.Check Program.cs to ensure the MySQL Connection String matches your local setup:
+```bash
+static string _dbConnString = "Server=127.0.0.1;Port=3306;Database=aoi;Uid=root;Pwd=;";
+3.Press F5 or click Start.
+
+🔮 Future Improvements
+[ ] Add a Web Dashboard (Blazor/ASP.NET Core) to visualize OEE charts.
+
+[ ] Implement Docker support for containerized deployment.
+
+[ ] Add Telegram/Email alerts when consecutive failures occur.
+
+👤 Author
+Roy Siregar
+Passionate about Industrial Automation, IoT, and Backend Engineering.
